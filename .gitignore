@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+.vscode
+gym_env
+
 # C extensions
 *.so
 
