@@ -1,7 +1,6 @@
 import os
 import gym_video_streamer
-# from setuptools import setup
-from distutils.core import setup
+from setuptools import setup
 
 description = "Wrapper to live stream OpenAI's gym agents training process from Google Colab to Twitch/YouTube server."
 
@@ -26,18 +25,17 @@ setup(
     author="Dhyey Thumar",
     author_email="dhyeythumar@gmail.com",
     version=VERSION,
+    install_requires=BASE_DEPENDENCIES,
+    packages=["gym_video_streamer"],
 
+    url="https://github.com/dhyeythumar/gym-video-streamer",
     description=description,
     long_description=long_description,
     long_description_content_type=long_description_content_type,
 
-    url="https://github.com/dhyeythumar/gym-video-streamer",
-    packages=["gym_video_streamer"],
-    install_requires=BASE_DEPENDENCIES,
-
     keywords=["OpenAI", "Gym", "Gym Wrapper", "Video Streamer", "Google Colab"],
     classifiers=[
-        "Intended Audience :: Science/Research/Developers",
+        "Intended Audience :: Science/Research",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "License :: OSI Approved :: MIT License",
         "Operating System :: POSIX :: Linux",

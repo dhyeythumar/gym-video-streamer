@@ -36,19 +36,19 @@ def set_pyvirtualdisplay():
 
 
 def SetupVirtualDisplay(force=False):
-    if force is False:
-        # Stop the exec for Windows OS & macOS
-        system = platform.system()
-        if system in ["Windows", "Darwin", "Java"] is not None:
-            print("You are using {} platform & this Virtual Display Setup is only required for Google Colab!\n\
-            You have to install ffmpeg manually from 'https://ffmpeg.org/download.html'".format(system))
+    # Stop the exec for Windows OS & macOS
+    system = platform.system()
+    if system in ["Windows", "Darwin", "Java"] is not None:
+        print("You are using {} platform & this Virtual Display Setup is only required for Google Colab!\n\
+        You have to install ffmpeg manually from 'https://ffmpeg.org/download.html'".format(system))
+        if force is False:
             return
-    else:
-        # pyvirtualdisplay depends on xvfb
-        installer(packages=["ffmpeg", "xvfb"])
-        print("Installed all the required packages.")
-        set_pyvirtualdisplay()
-        print("Virtual Display Setup complete!")
+
+    # pyvirtualdisplay depends on xvfb
+    installer(packages=["ffmpeg", "xvfb"])
+    print("Installed all the required packages.")
+    set_pyvirtualdisplay()
+    print("Virtual Display Setup complete!")
 
 
 # ---- Note ----

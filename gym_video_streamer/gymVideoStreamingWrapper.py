@@ -1,9 +1,9 @@
 import gym
 from gym import error, Wrapper
-from streamer import printMsg, Streamer
+from .streamer import printMsg, Streamer
 
 STREAM_INFO_ERR_MSG = "The provided Stream Info dictionary is not correctly passed!\n\
-    Video won't be streamed. Instead it will be stored locally @ ./videos/..."
+Video won't be streamed. Instead it will be stored locally @ ./videos/"
 
 class VideoStreamingWrapper(Wrapper):
     def __init__(self, env, streamInfo=None):
@@ -13,15 +13,15 @@ class VideoStreamingWrapper(Wrapper):
         self.output_frames_per_sec = env.metadata.get('video.output_frames_per_second', self.frames_per_sec)
 
         modes = env.metadata.get('render.modes', [])  # can be {'human', 'ansi', 'rgb_array'}
-        self.enabled = False
+        self.enabled = True
         self.streamURL = ""
 
         if "rgb_array" not in modes:
-            printMsg("Disabling Video Streaming Wrapper because {} it does't supports 'rgb_array'.".format(env))
+            self.enabled = False
+            printMsg("Disabling Video Streaming Wrapper because {} it doesn't supports 'rgb_array'.".format(env))
         else:
             try:
-                if ((self.streamInfo is not None) and (streamInfo["URL"] != "") and (streamInfo["secret"] != "")):
-                    self.enabled = True
+                if ((streamInfo is not None) and (streamInfo["URL"] != "") and (streamInfo["secret"] != "")):
                     self.streamURL = streamInfo["URL"] + streamInfo["secret"]
                     printMsg("Video Streaming Wrapper is ready to stream!!")
                 else:
@@ -30,7 +30,7 @@ class VideoStreamingWrapper(Wrapper):
                 printMsg(STREAM_INFO_ERR_MSG, e)
 
     def render(self, mode=None, **kwargs):
-        # print(self.metadata)  # {'render.modes': ['human', 'rgb_array'], 'video.frames_per_second': 50}
+        # print(self.metadata)  # eg: {'render.modes': ['human', 'rgb_array'], 'video.frames_per_second': 50}
         if self.enabled is True:
             frame = self.env.render(mode="rgb_array", **kwargs)
             try:
@@ -46,19 +46,20 @@ class VideoStreamingWrapper(Wrapper):
             except (error.InvalidFrame,
                     error.DependencyNotInstalled,
                     error.Error) as e:
-                printMsg("Video Streaming Wrapper exited with an exception!", e)
                 self.enabled = False
+                printMsg("Video Streaming Wrapper exited with an exception!", e)
                 return self.env.render(mode, **kwargs)
         else:
             return self.env.render(mode, **kwargs)
 
     def close(self):
         super(VideoStreamingWrapper, self).close()
-        if self.Streamer is not None:
-            self.Streamer.close()
-        else:
-            printMsg("Environment closed before Video Streaming Wrapper could capture anything.")
-        self.enabled = False
+        if self.enabled is True:
+            self.enabled = False
+            if self.Streamer is not None:
+                self.Streamer.close()
+            else:
+                printMsg("Environment closed before Video Streaming Wrapper could capture anything.")
 
 
 # Test the VideoStreamingWrapper with simple CartPole Agent

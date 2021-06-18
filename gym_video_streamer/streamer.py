@@ -1,6 +1,5 @@
 from gym import error
-import distutils.spawn
-import distutils.version
+import shutil
 import numpy as np
 import subprocess
 import os
@@ -8,12 +7,11 @@ from datetime import datetime
 
 
 def printMsg(feedbackMsg, errMsg=""):
-    print("="*200)
+    print("-"*120)
     print(feedbackMsg)
     if errMsg != "":
-        print("-"*100)
-        print(errMsg)
-    print("="*200)
+        print("---")
+        print("[ERR] :: ", errMsg)
 
 
 def touch(path):
@@ -44,15 +42,15 @@ class Streamer(object):
         else:
             directory = "./videos"
             if not os.path.exists(directory):
-                print("Creating directory for storing videos {%s}", directory)
+                print("\nCreating directory for storing videos {}".format(directory))
                 os.makedirs(directory, exist_ok=True)
 
             self.__directory = os.path.abspath(directory)
-            date = datetime.now().strftime("%Y_%m_%d-%I:%M:%S_%p")
-            self.ffmpegOutput = os.path.join(self.__directory, '{}'.format(date))
+            date = datetime.now().strftime("(%Y.%m.%d)-(%I.%M.%S)-%p")
+            self.ffmpegOutput = os.path.join(self.__directory, 'video_{}.mp4'.format(date))
             touch(self.ffmpegOutput)  # just in case
 
-        if distutils.spawn.find_executable("ffmpeg") is not None:
+        if shutil.which("ffmpeg") is not None:
             self.backend = "ffmpeg"
         else:
             raise error.DependencyNotInstalled("No ffmpeg executable found!")
