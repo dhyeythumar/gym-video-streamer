@@ -6,7 +6,11 @@
 Now you can Live Stream the Agent's learning behavior to Twitch/YouTube from Google Colab while training these Agents.
 </h4>
 
-<!-- Add the google colab nootebook here -->
+<p align="center">
+    <a href="https://colab.research.google.com/github/dhyeythumar/">
+      <img alt="colab link" src="https://colab.research.google.com/assets/colab-badge.svg" />
+    </a>
+</p>
 
 ## What’s In This Document
 
