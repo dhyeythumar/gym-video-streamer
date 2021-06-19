@@ -7,7 +7,7 @@ Now you can Live Stream the Agent's learning behavior to Twitch/YouTube from Goo
 </h4>
 
 <p align="center">
-    <a href="https://colab.research.google.com/github/dhyeythumar/">
+    <a href="https://colab.research.google.com/github/dhyeythumar/gym-video-streamer/blob/main/Streaming-Gym-Envs-from-Colab.ipynb">
       <img alt="colab link" src="https://colab.research.google.com/assets/colab-badge.svg" />
     </a>
 </p>
