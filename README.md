@@ -6,11 +6,18 @@
 Now you can Live Stream the Agent's learning behavior to Twitch/YouTube from Google Colab while training these Agents.
 </h4>
 
-<p align="center">
-    <a href="https://colab.research.google.com/github/dhyeythumar/gym-video-streamer/blob/main/Streaming-Gym-Envs-from-Colab.ipynb">
-      <img alt="colab link" src="https://colab.research.google.com/assets/colab-badge.svg" />
-    </a>
-</p>
+---
+
+<div align="center">
+    <p>Try Google Colab Notebook</p>
+    <p>
+        <a href="https://colab.research.google.com/github/dhyeythumar/gym-video-streamer/blob/v1.0/Streaming Gym Envs from Colab -v1.0.ipynb">
+          <img alt="colab link" src="https://colab.research.google.com/assets/colab-badge.svg" />
+        </a>
+    </p>
+</div>
+
+---
 
 ## What’s In This Document
 
