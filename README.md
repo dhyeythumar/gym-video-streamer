@@ -1,12 +1,10 @@
-# Gym Video Streamer
+<p align="center">
+    <img alt="logo" src="https://github.com/dhyeythumar/impression/blob/master/openai_assets/OpenAI-Gym.png" width="160"/>
+</p>
 
-**<h3 align="center">A Video Streaming Wrapper for OpenAI's Gym Environments</h3>**
+<h2 align="center">Introducing  video streaming wrapper for OpenAI’s Gym Environments</h2>
 
-<h4 align="center">
-Now you can Live Stream the Agent's learning behavior to Twitch/YouTube from Google Colab while training these Agents.
-</h4>
-
----
+<h4 align="center">Now you can live stream the Gym agent’s learning behavior to Twitch/YouTube from Google Colab while training these agents.</h4>
 
 ## Releases & Documentation
 
