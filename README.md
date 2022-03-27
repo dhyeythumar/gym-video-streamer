@@ -4,7 +4,12 @@
 
 <h2 align="center">Introducing  video streaming wrapper for OpenAI’s Gym Environments</h2>
 
-<h4 align="center">Now you can live stream the Gym agent’s learning behavior to Twitch/YouTube from Google Colab while training these agents.</h4>
+<h4 align="center">
+    Now you can live stream the Gym agent’s learning behavior to Twitch/YouTube from Google Colab while training these agents.
+    <br /><br />
+    <a href="https://dhyeythumar.medium.com/video-streaming-wrapper-for-openais-gym-environments-193df93a5390"><img alt="medium-logo" src="https://img.shields.io/badge/Medium-Video%20streaming%20...-191919?style=for-the-badge&logo=medium" /></a>
+    <a href="https://pypi.org/project/gym-video-streamer/1.0/"><img alt="pypi-logo" src="https://img.shields.io/badge/PyPI-gym--video--streamer%201.0-%23006dad?style=for-the-badge&logo=pypi" /></a>
+</h4>
 
 ## Releases & Documentation
 
