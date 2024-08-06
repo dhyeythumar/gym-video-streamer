@@ -16,6 +16,7 @@ def installer(packages):
             else:
                 print(f"Installing {package} ...")
                 pkg.mark_install()
+                print("Installed!")
         cache.commit()
     except Exception as e:
         print("Exception :: {}".format(e))

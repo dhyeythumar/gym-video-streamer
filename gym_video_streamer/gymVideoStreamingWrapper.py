@@ -1,5 +1,5 @@
-import gym
-from gym import error, Wrapper
+import gymnasium as gym
+from gymnasium import error, Wrapper
 from .streamer import printMsg, Streamer
 
 STREAM_INFO_ERR_MSG = "The provided Stream Info dictionary is not correctly passed!\n\
@@ -9,10 +9,10 @@ class VideoStreamingWrapper(Wrapper):
     def __init__(self, env, streamInfo=None):
         super(VideoStreamingWrapper, self).__init__(env)
         self.Streamer = None
-        self.frames_per_sec = env.metadata.get('video.frames_per_second', 30)
-        self.output_frames_per_sec = env.metadata.get('video.output_frames_per_second', self.frames_per_sec)
+        self.frames_per_sec = env.metadata['render_fps']
+        self.output_frames_per_sec = env.metadata['render_fps']
 
-        modes = env.metadata.get('render.modes', [])  # can be {'human', 'ansi', 'rgb_array'}
+        modes = env.metadata['render_modes']  # can be {'human', 'ansi', 'rgb_array'}
         self.enabled = True
         self.streamURL = ""
 
@@ -29,10 +29,10 @@ class VideoStreamingWrapper(Wrapper):
             except Exception as e:
                 printMsg(STREAM_INFO_ERR_MSG, e)
 
-    def render(self, mode=None, **kwargs):
+    def render(self):
         # print(self.metadata)  # eg: {'render.modes': ['human', 'rgb_array'], 'video.frames_per_second': 50}
         if self.enabled is True:
-            frame = self.env.render(mode="rgb_array", **kwargs)
+            frame = self.env.render()
             try:
                 if self.Streamer is None:
                     self.Streamer = Streamer(
@@ -48,9 +48,9 @@ class VideoStreamingWrapper(Wrapper):
                     error.Error) as e:
                 self.enabled = False
                 printMsg("Video Streaming Wrapper exited with an exception!", e)
-                return self.env.render(mode, **kwargs)
+                return self.env.render()
         else:
-            return self.env.render(mode, **kwargs)
+            return self.env.render()
 
     def close(self):
         super(VideoStreamingWrapper, self).close()
@@ -65,18 +65,18 @@ class VideoStreamingWrapper(Wrapper):
 # Test the VideoStreamingWrapper with simple CartPole Agent
 if __name__ == "__main__":
     # No streamInfo provided then video will be stored locally
-    env = VideoStreamingWrapper(gym.make("CartPole-v1"))
+    env = VideoStreamingWrapper(gym.make("CartPole-v1",render_mode="rgb_array"))
     # print(env.action_space)
     try:
-        observation = env.reset()
+        observation, info = env.reset()
         i = 0
         while True:
             if i == 100:
                 break
             env.render()
             action = env.action_space.sample()
-            observation, reward, done, info = env.step(action)
-            if done:
+            observation, reward, terminated, truncated, info = env.step(action)
+            if terminated:
                 env.reset()
                 i += 1
     except Exception as e:

@@ -1,4 +1,4 @@
-from gym import error
+from gymnasium import error
 import shutil
 import numpy as np
 import subprocess

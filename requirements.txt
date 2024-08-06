@@ -1,2 +1,2 @@
-gym>=0.17.3
-pyvirtualdisplay>=2.2
+gymnasium>=0.29.1
+pyvirtualdisplay>=3.0
